@@ -1,5 +1,5 @@
 //
-//  OTAppDelegate.h
+//  OTAppManager.h
 //  TweetMap
 //
 //  Created by Oleksii Taran on 7/30/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 //
-@interface OTAppDelegate : UIResponder <UIApplicationDelegate>
+@interface OTAppManager : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 

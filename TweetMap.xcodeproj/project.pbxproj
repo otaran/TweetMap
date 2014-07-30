@@ -8,11 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4907AE3D19897DC3009FDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE3C19897DC3009FDE8B /* main.m */; };
-		4907AE4019897DC3009FDE8B /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE3F19897DC3009FDE8B /* OTAppDelegate.m */; };
-		4907AE4319897DC3009FDE8B /* TweetMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE4119897DC3009FDE8B /* TweetMap.xcdatamodeld */; };
+		4907AE4019897DC3009FDE8B /* OTAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE3F19897DC3009FDE8B /* OTAppManager.m */; };
 		4907AE4919897DC3009FDE8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907AE4719897DC3009FDE8B /* Main.storyboard */; };
 		4907AE4B19897DC3009FDE8B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4907AE4A19897DC3009FDE8B /* Images.xcassets */; };
 		4907AE5719897DC4009FDE8B /* TweetMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE5619897DC4009FDE8B /* TweetMapTests.m */; };
+		4907AE6119898BB2009FDE8B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4907AE6019898BB2009FDE8B /* MapKit.framework */; };
+		4907AE6319898BB8009FDE8B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4907AE6219898BB8009FDE8B /* CoreLocation.framework */; };
+		4907AE6619898D42009FDE8B /* OTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6519898D42009FDE8B /* OTDataManager.m */; };
+		4907AE6A19899220009FDE8B /* TweetMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6819899220009FDE8B /* TweetMap.xcdatamodeld */; };
+		4907AE6D19899448009FDE8B /* OTTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6C19899448009FDE8B /* OTTweet.m */; };
+		4907AE7019899448009FDE8B /* OTPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6F19899448009FDE8B /* OTPerson.m */; };
+		4907AE731989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */; };
+		4907AE7719899C87009FDE8B /* OTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE7619899C87009FDE8B /* OTLocation.m */; };
 		8C6F08B27D884D7F89F9743D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A4BBAAA2054D20A0191945 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -31,14 +38,27 @@
 		4907AE3719897DC3009FDE8B /* TweetMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907AE3B19897DC3009FDE8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4907AE3C19897DC3009FDE8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4907AE3E19897DC3009FDE8B /* OTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppDelegate.h; sourceTree = "<group>"; };
-		4907AE3F19897DC3009FDE8B /* OTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppDelegate.m; sourceTree = "<group>"; };
-		4907AE4219897DC3009FDE8B /* TweetMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetMap.xcdatamodel; sourceTree = "<group>"; };
+		4907AE3E19897DC3009FDE8B /* OTAppManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppManager.h; sourceTree = "<group>"; };
+		4907AE3F19897DC3009FDE8B /* OTAppManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppManager.m; sourceTree = "<group>"; };
 		4907AE4819897DC3009FDE8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4907AE4A19897DC3009FDE8B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4907AE5019897DC4009FDE8B /* TweetMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweetMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907AE5519897DC4009FDE8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4907AE5619897DC4009FDE8B /* TweetMapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetMapTests.m; sourceTree = "<group>"; };
+		4907AE6019898BB2009FDE8B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4907AE6219898BB8009FDE8B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4907AE6419898D42009FDE8B /* OTDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTDataManager.h; sourceTree = "<group>"; };
+		4907AE6519898D42009FDE8B /* OTDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTDataManager.m; sourceTree = "<group>"; };
+		4907AE6919899220009FDE8B /* TweetMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetMap.xcdatamodel; sourceTree = "<group>"; };
+		4907AE6B19899448009FDE8B /* OTTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTweet.h; sourceTree = "<group>"; };
+		4907AE6C19899448009FDE8B /* OTTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTweet.m; sourceTree = "<group>"; };
+		4907AE6E19899448009FDE8B /* OTPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPerson.h; sourceTree = "<group>"; };
+		4907AE6F19899448009FDE8B /* OTPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPerson.m; sourceTree = "<group>"; };
+		4907AE711989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+TweetMapExtensions.h"; sourceTree = "<group>"; };
+		4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+TweetMapExtensions.m"; sourceTree = "<group>"; };
+		4907AE7419899906009FDE8B /* OTDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTDefines.h; sourceTree = "<group>"; };
+		4907AE7519899C87009FDE8B /* OTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocation.h; sourceTree = "<group>"; };
+		4907AE7619899C87009FDE8B /* OTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocation.m; sourceTree = "<group>"; };
 		6DA4E30D2FA64CD89BB2B96A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4907AE6319898BB8009FDE8B /* CoreLocation.framework in Frameworks */,
+				4907AE6119898BB2009FDE8B /* MapKit.framework in Frameworks */,
 				8C6F08B27D884D7F89F9743D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +86,8 @@
 		25824B7540C64311ADD90181 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4907AE6219898BB8009FDE8B /* CoreLocation.framework */,
+				4907AE6019898BB2009FDE8B /* MapKit.framework */,
 				09A4BBAAA2054D20A0191945 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -92,11 +116,12 @@
 		4907AE3919897DC3009FDE8B /* TweetMap */ = {
 			isa = PBXGroup;
 			children = (
-				4907AE3E19897DC3009FDE8B /* OTAppDelegate.h */,
-				4907AE3F19897DC3009FDE8B /* OTAppDelegate.m */,
+				4907AE67198991E5009FDE8B /* Data */,
+				4907AE3E19897DC3009FDE8B /* OTAppManager.h */,
+				4907AE3F19897DC3009FDE8B /* OTAppManager.m */,
+				4907AE7419899906009FDE8B /* OTDefines.h */,
 				4907AE4719897DC3009FDE8B /* Main.storyboard */,
 				4907AE4A19897DC3009FDE8B /* Images.xcassets */,
-				4907AE4119897DC3009FDE8B /* TweetMap.xcdatamodeld */,
 				4907AE3A19897DC3009FDE8B /* Supporting Files */,
 			);
 			path = TweetMap;
@@ -126,6 +151,24 @@
 				4907AE5519897DC4009FDE8B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4907AE67198991E5009FDE8B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4907AE6819899220009FDE8B /* TweetMap.xcdatamodeld */,
+				4907AE6419898D42009FDE8B /* OTDataManager.h */,
+				4907AE6519898D42009FDE8B /* OTDataManager.m */,
+				4907AE711989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.h */,
+				4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */,
+				4907AE7519899C87009FDE8B /* OTLocation.h */,
+				4907AE7619899C87009FDE8B /* OTLocation.m */,
+				4907AE6E19899448009FDE8B /* OTPerson.h */,
+				4907AE6F19899448009FDE8B /* OTPerson.m */,
+				4907AE6B19899448009FDE8B /* OTTweet.h */,
+				4907AE6C19899448009FDE8B /* OTTweet.m */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,9 +306,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4907AE4019897DC3009FDE8B /* OTAppDelegate.m in Sources */,
+				4907AE6D19899448009FDE8B /* OTTweet.m in Sources */,
+				4907AE4019897DC3009FDE8B /* OTAppManager.m in Sources */,
+				4907AE731989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m in Sources */,
+				4907AE7719899C87009FDE8B /* OTLocation.m in Sources */,
 				4907AE3D19897DC3009FDE8B /* main.m in Sources */,
-				4907AE4319897DC3009FDE8B /* TweetMap.xcdatamodeld in Sources */,
+				4907AE6619898D42009FDE8B /* OTDataManager.m in Sources */,
+				4907AE6A19899220009FDE8B /* TweetMap.xcdatamodeld in Sources */,
+				4907AE7019899448009FDE8B /* OTPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,9 +429,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TweetMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -393,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TweetMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,12 +517,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4907AE4119897DC3009FDE8B /* TweetMap.xcdatamodeld */ = {
+		4907AE6819899220009FDE8B /* TweetMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4907AE4219897DC3009FDE8B /* TweetMap.xcdatamodel */,
+				4907AE6919899220009FDE8B /* TweetMap.xcdatamodel */,
 			);
-			currentVersion = 4907AE4219897DC3009FDE8B /* TweetMap.xcdatamodel */;
+			currentVersion = 4907AE6919899220009FDE8B /* TweetMap.xcdatamodel */;
 			path = TweetMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

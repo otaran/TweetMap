@@ -4,14 +4,19 @@ PODS:
   - CocoaLumberjack/Core (1.9.1)
   - CocoaLumberjack/Extensions (1.9.1):
     - CocoaLumberjack/Core
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.2)
   - STTwitter (0.1.4)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 1.9)
+  - MagicalRecord (~> 2.2)
   - STTwitter (~> 0.1)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   STTwitter: 809f63f856341fdd103fbc6d9e4818d48a91be0c
 
 COCOAPODS: 0.33.1

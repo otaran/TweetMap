@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OTAppDelegate.h"
+#import "OTAppManager.h"
 
 int main(int argc, char * argv[]) {
 	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([OTAppDelegate class]));
+	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([OTAppManager class]));
 	}
 }

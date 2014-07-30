@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6208.6" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="OTLocation" representedClassName="OTLocation" syncable="YES">
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OTTweet" inverseName="locations" inverseEntity="OTTweet" syncable="YES"/>
+    </entity>
+    <entity name="OTPerson" representedClassName="OTPerson" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screenName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OTTweet" inverseName="user" inverseEntity="OTTweet" syncable="YES"/>
+    </entity>
+    <entity name="OTTweet" representedClassName="OTTweet" syncable="YES">
+        <attribute name="coordinates" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OTLocation" inverseName="tweets" inverseEntity="OTLocation" syncable="YES"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="OTPerson" inverseName="tweets" inverseEntity="OTPerson" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="OTPerson" positionX="-54" positionY="18" width="128" height="118"/>
+        <element name="OTTweet" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="OTLocation" positionX="-27" positionY="81" width="128" height="58"/>
+    </elements>
+</model>

@@ -19,6 +19,11 @@ typedef NS_ENUM(NSInteger, OTDataManagerError) {
 //
 @interface OTDataManager : NSObject
 
+@property (nonatomic, strong, readonly) NSManagedObjectContext *masterManagedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *mainManagedObjectContext;
+
+- (NSPredicate *)tweetsPredicateForLocation:(CLLocation *)location;
+
 - (void)getLatestTweetsAtLocation:(CLLocation *)location completionHandler:(void (^)(NSArray *latestTweets, NSError *error))completionHandler;
 
 @end

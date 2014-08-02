@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 
 //
+@class OTDataManager;
+
+//
 @interface OTAppManager : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+
+@property (nonatomic, strong, readonly) OTDataManager *dataManager;
+
++ (instancetype)sharedAppManager;
 
 @end
 

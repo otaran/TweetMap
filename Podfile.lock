@@ -43,7 +43,6 @@ PODS:
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
-  - NSArray+Functional (1.0.0)
   - STTwitter (0.1.4)
 
 DEPENDENCIES:
@@ -51,7 +50,6 @@ DEPENDENCIES:
   - CocoaLumberjack (~> 1.9)
   - FontAwesomeKit (~> 2.1)
   - MagicalRecord (~> 2.2)
-  - NSArray+Functional (~> 1.0)
   - STTwitter (~> 0.1)
 
 SPEC CHECKSUMS:
@@ -59,7 +57,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
   FontAwesomeKit: af6eef70d23986349284d2feb4e959459621587d
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
-  NSArray+Functional: 2c9ad6ab9b0dc7abe73416d265d569c8b20b9f3c
   STTwitter: 809f63f856341fdd103fbc6d9e4818d48a91be0c
 
 COCOAPODS: 0.33.1

@@ -14,9 +14,12 @@
 
 - (BOOL)importCoordinates:(id)coordinates
 {
-	CLLocationDegrees const longitude = [[[coordinates objectForKey:@"coordinates"] objectAtIndex:0] doubleValue];
-	CLLocationDegrees const latitude  = [[[coordinates objectForKey:@"coordinates"] objectAtIndex:1] doubleValue];
-	self.coordinates = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+	self.coordinates = coordinates;
+	if (coordinates) {
+		self.latitude  = coordinates[@"coordinates"][1];
+		self.longitude = coordinates[@"coordinates"][0];
+	}
+	
 	return YES;
 }
 

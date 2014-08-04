@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, OTDataManagerError) {
 @property (nonatomic, strong, readonly) NSManagedObjectContext *masterManagedObjectContext;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainManagedObjectContext;
 
-- (NSPredicate *)tweetsPredicateForLocation:(CLLocation *)location;
+- (NSPredicate *)predicateForTweetsAtLocation:(CLLocation *)location distance:(CLLocationDistance)distance;
 
 - (void)getLatestTweetsWithCompletionHandler:(void (^)(NSArray *latestTweets, NSError *error))completionHandler;
 

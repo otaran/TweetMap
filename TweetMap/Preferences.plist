@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Displayed Tweets Count</key>
+	<integer>20</integer>
+	<key>Search Radius</key>
+	<real>5000</real>
+	<key>Tweets Polling Interval</key>
+	<integer>60</integer>
+</dict>
+</plist>

@@ -20,9 +20,10 @@
 		4907AE6619898D42009FDE8B /* OTDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6519898D42009FDE8B /* OTDataManager.m */; };
 		4907AE6A19899220009FDE8B /* TweetMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE6819899220009FDE8B /* TweetMap.xcdatamodeld */; };
 		4907AE731989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */; };
-		4907AE7719899C87009FDE8B /* OTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4907AE7619899C87009FDE8B /* OTLocation.m */; };
 		49FEAD96198ED23E001487EA /* OTTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FEAD95198ED23E001487EA /* OTTweet.m */; };
 		49FEAD99198ED23E001487EA /* OTPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FEAD98198ED23E001487EA /* OTPerson.m */; };
+		491D6BEF1990035200F240EB /* NSUserDefaults+TweetMapExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D6BEE1990035200F240EB /* NSUserDefaults+TweetMapExtensions.m */; };
+		491D6BF11990050100F240EB /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 491D6BF01990050100F240EB /* Preferences.plist */; };
 		49FEAD9C198EE0E9001487EA /* OTTweetMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FEAD9B198EE0E9001487EA /* OTTweetMapViewController.m */; };
 		49FEAD9F198EE0F9001487EA /* OTTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FEAD9E198EE0F9001487EA /* OTTweetViewController.m */; };
 		49FEADA2198EE997001487EA /* OTTweet+TweetMapExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FEADA1198EE997001487EA /* OTTweet+TweetMapExtensions.m */; };
@@ -66,12 +67,13 @@
 		4907AE711989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+TweetMapExtensions.h"; sourceTree = "<group>"; };
 		4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+TweetMapExtensions.m"; sourceTree = "<group>"; };
 		4907AE7419899906009FDE8B /* OTDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTDefines.h; sourceTree = "<group>"; };
-		4907AE7519899C87009FDE8B /* OTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocation.h; sourceTree = "<group>"; };
-		4907AE7619899C87009FDE8B /* OTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocation.m; sourceTree = "<group>"; };
 		49FEAD94198ED23E001487EA /* OTTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTweet.h; sourceTree = "<group>"; };
 		49FEAD95198ED23E001487EA /* OTTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTweet.m; sourceTree = "<group>"; };
 		49FEAD97198ED23E001487EA /* OTPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPerson.h; sourceTree = "<group>"; };
 		49FEAD98198ED23E001487EA /* OTPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPerson.m; sourceTree = "<group>"; };
+		491D6BED1990035200F240EB /* NSUserDefaults+TweetMapExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+TweetMapExtensions.h"; sourceTree = "<group>"; };
+		491D6BEE1990035200F240EB /* NSUserDefaults+TweetMapExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+TweetMapExtensions.m"; sourceTree = "<group>"; };
+		491D6BF01990050100F240EB /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Preferences.plist; sourceTree = "<group>"; };
 		49FEAD9A198EE0E9001487EA /* OTTweetMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTweetMapViewController.h; sourceTree = "<group>"; };
 		49FEAD9B198EE0E9001487EA /* OTTweetMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTweetMapViewController.m; sourceTree = "<group>"; };
 		49FEAD9D198EE0F9001487EA /* OTTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTweetViewController.h; sourceTree = "<group>"; };
@@ -148,7 +150,10 @@
 				49FEAD9E198EE0F9001487EA /* OTTweetViewController.m */,
 				4907AE7419899906009FDE8B /* OTDefines.h */,
 				4904F4C4198D9286001D78C6 /* OTLogging.h */,
+				491D6BED1990035200F240EB /* NSUserDefaults+TweetMapExtensions.h */,
+				491D6BEE1990035200F240EB /* NSUserDefaults+TweetMapExtensions.m */,
 				4907AE4719897DC3009FDE8B /* Main.storyboard */,
+				491D6BF01990050100F240EB /* Preferences.plist */,
 				4907AE4A19897DC3009FDE8B /* Images.xcassets */,
 				4907AE3A19897DC3009FDE8B /* Supporting Files */,
 			);
@@ -191,8 +196,6 @@
 				4904F4C2198D9104001D78C6 /* NSManagedObject+TweetMapExtensions.m */,
 				4907AE711989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.h */,
 				4907AE721989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m */,
-				4907AE7519899C87009FDE8B /* OTLocation.h */,
-				4907AE7619899C87009FDE8B /* OTLocation.m */,
 				49FEAD97198ED23E001487EA /* OTPerson.h */,
 				49FEAD98198ED23E001487EA /* OTPerson.m */,
 				49FEAD94198ED23E001487EA /* OTTweet.h */,
@@ -288,6 +291,7 @@
 			files = (
 				4907AE4919897DC3009FDE8B /* Main.storyboard in Resources */,
 				4907AE4B19897DC3009FDE8B /* Images.xcassets in Resources */,
+				491D6BF11990050100F240EB /* Preferences.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,11 +346,11 @@
 				4904F4BD198D8EF3001D78C6 /* OTTweetTableViewController.m in Sources */,
 				49FEAD9C198EE0E9001487EA /* OTTweetMapViewController.m in Sources */,
 				4907AE4019897DC3009FDE8B /* OTAppManager.m in Sources */,
+				491D6BEF1990035200F240EB /* NSUserDefaults+TweetMapExtensions.m in Sources */,
 				4904F4C3198D9104001D78C6 /* NSManagedObject+TweetMapExtensions.m in Sources */,
 				49FEADA2198EE997001487EA /* OTTweet+TweetMapExtensions.m in Sources */,
 				4907AE731989962B009FDE8B /* NSManagedObjectContext+TweetMapExtensions.m in Sources */,
 				4904F4B7198D7EEE001D78C6 /* OTAppScheduler.m in Sources */,
-				4907AE7719899C87009FDE8B /* OTLocation.m in Sources */,
 				4907AE3D19897DC3009FDE8B /* main.m in Sources */,
 				4907AE6619898D42009FDE8B /* OTDataManager.m in Sources */,
 				4907AE6A19899220009FDE8B /* TweetMap.xcdatamodeld in Sources */,

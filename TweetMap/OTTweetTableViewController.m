@@ -17,6 +17,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
 #import "OTTweetViewController.h"
+#import "NSUserDefaults+TweetMapExtensions.h"
 
 //
 @interface OTTweetTableViewController () <NSFetchedResultsControllerDelegate>
@@ -36,8 +37,13 @@
 	self.dataManager = [OTAppManager sharedAppManager].dataManager;
 	
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[OTTweet entityName]];
-	request.predicate = [self.dataManager tweetsPredicateForLocation:nil];
+	request.predicate = ({
+		CLLocation *location = [OTAppManager sharedAppManager].currentLocationManager.location;
+		CLLocationDistance distance = [NSUserDefaults standardUserDefaults].searchRadius;
+		[self.dataManager predicateForTweetsAtLocation:location distance:distance];
+	});
 	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:OTKey(createdAt) ascending:NO]];
+	request.fetchLimit = [NSUserDefaults standardUserDefaults].displayedTweetsCount;
 	
 	NSManagedObjectContext *context = self.dataManager.mainManagedObjectContext;
 	

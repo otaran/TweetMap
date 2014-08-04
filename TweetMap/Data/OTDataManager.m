@@ -9,11 +9,11 @@
 #import "OTDataManager.h"
 #import <STTwitter/STTwitter.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
-#import <NSArray+Functional/NSArray+Functional.h>
+#import "NSManagedObject+TweetMapExtensions.h"
 #import "NSManagedObjectContext+TweetMapExtensions.h"
 #import "OTDefines.h"
 #import "OTLogging.h"
-
+#import "NSUserDefaults+TweetMapExtensions.h"
 #import "OTTweet.h"
 #import "OTPerson.h"
 
@@ -62,9 +62,20 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 	return self;
 }
 
-- (NSPredicate *)tweetsPredicateForLocation:(CLLocation *)location
+- (NSPredicate *)predicateForTweetsAtLocation:(CLLocation *)location distance:(CLLocationDistance)distance
 {
-	return [NSPredicate predicateWithValue:YES];
+	NSParameterAssert(location != nil);
+	NSParameterAssert(distance >= 0.0);
+	
+	NSPredicate *hasLocationPredicate = [NSPredicate predicateWithFormat:@"coordinates != NULL"];
+	
+	CLLocationDegrees const latitude  = location.coordinate.latitude;
+	CLLocationDegrees const longitude = location.coordinate.longitude;
+	double const earthRadius = 6400000.0;
+	double const angle = (distance / earthRadius) * (180.0 / M_PI);
+	NSPredicate *inRangePredicate = [NSPredicate predicateWithFormat:@"(latitude - %f) * (latitude - %f) + (longitude - %f) * (longitude - %f) <= %f", latitude, latitude, longitude, longitude, angle * angle];
+	
+	return [NSCompoundPredicate andPredicateWithSubpredicates:@[hasLocationPredicate, inRangePredicate]];
 }
 
 - (void)getLatestTweetsWithCompletionHandler:(void (^)(NSArray *, NSError *))completionHandler
@@ -90,7 +101,18 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 {
 	completionHandler = completionHandler ?: ^(NSArray *ts, NSError *e) {};
 	
-	[self.twitterAPI getStatusesHomeTimelineWithCount:@"10" sinceID:nil maxID:nil trimUser:nil excludeReplies:nil contributorDetails:nil includeEntities:nil successBlock:^(NSArray *statuses) {
+	OTTweet *tweet;
+	NSError *error;
+	if (![self getLatestTweet:&tweet context:self.mainManagedObjectContext error:&error]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			completionHandler(nil, error);
+		});
+		return;
+	}
+	
+	NSUInteger count = [NSUserDefaults standardUserDefaults].displayedTweetsCount;
+	
+	[self.twitterAPI getStatusesHomeTimelineWithCount:[@(count) stringValue] sinceID:[tweet.id stringValue] maxID:nil trimUser:nil excludeReplies:nil contributorDetails:nil includeEntities:nil successBlock:^(NSArray *statuses) {
 		
 		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 		context.parentContext = self.mainManagedObjectContext;
@@ -115,9 +137,11 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 			if ([context save:&error]) {
 				NSArray *tweetIDs = [tweets valueForKey:OTKey(objectID)];
 				[self.mainManagedObjectContext performBlock:^{
-					NSArray *tweets = [tweetIDs mapUsingBlock:^(NSManagedObjectID *tweetID) {
-						return [self.mainManagedObjectContext objectWithID:tweetID];
-					}];
+					NSMutableArray *tweets = [NSMutableArray array];
+					for (NSManagedObjectID *objectID in tweetIDs) {
+						[tweets addObject:[self.mainManagedObjectContext objectWithID:objectID]];
+					}
+					
 					completionHandler(tweets, nil);
 					
 					[self.mainManagedObjectContext save:NULL];
@@ -166,6 +190,21 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 	[person MR_importValuesForKeysWithObject:values];
 	
 	return person;
+}
+
+- (BOOL)getLatestTweet:(out OTTweet **)tweet context:(NSManagedObjectContext *)context error:(out NSError **)error
+{
+	NSFetchRequest *request = [OTTweet MR_createFetchRequestInContext:context];
+	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:OTKey(id) ascending:NO]];
+	request.fetchLimit = 1;
+	
+	NSArray *tweets = [context executeFetchRequest:request error:error];
+	if (tweets == nil) {
+		return NO;
+	}
+	
+	*tweet = [tweets lastObject];
+	return YES;
 }
 
 - (NSURL *)applicationDocumentsDirectoryURL

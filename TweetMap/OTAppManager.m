@@ -12,6 +12,7 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import "OTDataManager.h"
 #import "OTAppScheduler.h"
+#import "NSUserDefaults+TweetMapExtensions.h"
 
 int ddLogLevel =
 #ifdef DEBUG
@@ -44,6 +45,11 @@ LOG_LEVEL_ERROR
 	[DDLog addLogger:[DDASLLogger sharedInstance]];
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
 	
+	NSURL *preferencesURL = [[NSBundle mainBundle] URLForResource:@"Preferences" withExtension:@"plist"];
+	NSAssert(preferencesURL != nil, @"");
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfURL:preferencesURL]];
+	
 	self.dataManager = [[OTDataManager alloc] init];
 	
 	self.currentLocationManager = [[CLLocationManager alloc] init];
@@ -51,7 +57,7 @@ LOG_LEVEL_ERROR
 	
 	self.scheduler = [[OTAppScheduler alloc] initWithDataManager:self.dataManager locationManager:self.currentLocationManager];
 	NSError *schedulerError;
-	if (![self.scheduler startWithPollingInterval:60.0 error:&schedulerError]) {
+	if (![self.scheduler startWithPollingInterval:[NSUserDefaults standardUserDefaults].tweetsPollingInterval error:&schedulerError]) {
 		DDLogError(@"Failed to start scheduler: %@", schedulerError);
 	}
 	

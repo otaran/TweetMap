@@ -14,10 +14,10 @@
 #import "OTTweet.h"
 #import "OTPerson.h"
 #import "NSManagedObject+TweetMapExtensions.h"
-#import <NSArray+Functional/NSArray+Functional.h>
 #import "OTDefines.h"
 #import "OTLogging.h"
 #import "OTTweetViewController.h"
+#import "NSUserDefaults+TweetMapExtensions.h"
 
 //
 @interface OTTweetMapViewController () <MKMapViewDelegate, NSFetchedResultsControllerDelegate>
@@ -42,8 +42,13 @@
 	self.dataManager = [OTAppManager sharedAppManager].dataManager;
 	
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[OTTweet entityName]];
-	request.predicate = [self.dataManager tweetsPredicateForLocation:nil];
+	request.predicate = ({
+		CLLocation *location = [OTAppManager sharedAppManager].currentLocationManager.location;
+		CLLocationDistance distance = [NSUserDefaults standardUserDefaults].searchRadius;
+		[self.dataManager predicateForTweetsAtLocation:location distance:distance];
+	});
 	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:OTKey(createdAt) ascending:NO]];
+	request.fetchLimit = [NSUserDefaults standardUserDefaults].displayedTweetsCount;
 	
 	self.tweetsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.dataManager.mainManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	self.tweetsController.delegate = self;
@@ -58,7 +63,8 @@
 	[self updateAnnotations];
 	
 	CLLocationCoordinate2D const coordinate = [OTAppManager sharedAppManager].currentLocationManager.location.coordinate;
-	self.mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, 30000, 30000);
+	CLLocationDistance const distance = 2 * [NSUserDefaults standardUserDefaults].searchRadius;
+	self.mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, distance, distance);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -97,7 +103,7 @@
 		MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
 		annotation.title = tweet.user.screenName;
 		annotation.subtitle = tweet.text;
-		annotation.coordinate = [tweet.coordinates coordinate];
+		annotation.coordinate = CLLocationCoordinate2DMake(tweet.latitude.doubleValue, tweet.longitude.doubleValue);
 		self.annotationsByTweetID[tweet.id] = annotation;
 	}];
 	

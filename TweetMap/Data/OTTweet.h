@@ -14,9 +14,9 @@
 @interface OTTweet : NSManagedObject
 
 @property (nonatomic, retain) id coordinates;
+@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSSet *locations;
 @property (nonatomic, retain) OTPerson *user;
 @end

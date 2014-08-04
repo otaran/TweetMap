@@ -10,7 +10,7 @@
 #import "OTDefines.h"
 #import "OTTweet.h"
 #import "OTPerson.h"
-#import <MagicalRecord/NSManagedObject+MagicalRecord.h>
+#import "NSManagedObject+TweetMapExtensions.h"
 
 //
 @implementation NSManagedObjectContext (TweetMapExtensions)
@@ -20,8 +20,7 @@
 	NSParameterAssert(tweet != NULL);
 	NSParameterAssert(tweetID != nil);
 	
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	request.entity = [OTTweet MR_entityDescriptionInContext:self];
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[OTTweet entityName]];
 	request.predicate = [NSPredicate predicateWithFormat:@"%K == %@", OTKey(id), tweetID];
 	request.fetchLimit = 1;
 	
@@ -39,8 +38,7 @@
 	NSParameterAssert(person != NULL);
 	NSParameterAssert(personID != nil);
 	
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	request.entity = [OTPerson MR_entityDescriptionInContext:self];
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[OTPerson entityName]];
 	request.predicate = [NSPredicate predicateWithFormat:@"%K == %@", OTKey(id), personID];
 	request.fetchLimit = 1;
 	

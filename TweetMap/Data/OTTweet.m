@@ -14,9 +14,9 @@
 @implementation OTTweet
 
 @dynamic coordinates;
+@dynamic createdAt;
 @dynamic id;
 @dynamic text;
-@dynamic createdAt;
 @dynamic locations;
 @dynamic user;
 

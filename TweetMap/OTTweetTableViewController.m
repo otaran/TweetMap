@@ -10,9 +10,13 @@
 #import "OTAppManager.h"
 #import "OTDataManager.h"
 #import "OTTweet.h"
+#import "OTPerson.h"
 #import "NSManagedObject+TweetMapExtensions.h"
 #import "OTDefines.h"
 #import "OTLogging.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <FontAwesomeKit/FontAwesomeKit.h>
+#import "OTTweetViewController.h"
 
 //
 @interface OTTweetTableViewController () <NSFetchedResultsControllerDelegate>
@@ -48,6 +52,21 @@
 	[self.refreshControl addTarget:self action:@selector(getLatestTweets:) forControlEvents:UIControlEventValueChanged];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	[super prepareForSegue:segue sender:sender];
+	
+	if ([segue.identifier isEqualToString:@"Table Tweet"]) {
+		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+		if (indexPath) {
+			OTTweetViewController *controller = segue.destinationViewController;
+			controller.tweet = [self.tweetsController objectAtIndexPath:indexPath];
+		}
+	}
+}
+
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	id<NSFetchedResultsSectionInfo> sectionInfo = self.tweetsController.sections[section];
@@ -57,8 +76,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	OTTweet *tweet = [self.tweetsController objectAtIndexPath:indexPath];
+	NSURL *avatarURL = [NSURL URLWithString:tweet.user.profileImageURLString];
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Tweet" forIndexPath:indexPath];
+	
+	[cell.imageView setImageWithURL:avatarURL placeholderImage:[[FAKFontAwesome userIconWithSize:24.0] imageWithSize:CGSizeMake(24.0, 24.0)]];
 	cell.textLabel.text = tweet.text;
 	
 	return cell;
@@ -75,7 +97,7 @@
 
 - (IBAction)getLatestTweets:(id)sender
 {
-	[self.dataManager getLatestTweetsAtLocation:nil completionHandler:^(NSArray *latestTweets, NSError *error) {
+	[self.dataManager getLatestTweetsWithCompletionHandler:^(NSArray *latestTweets, NSError *error) {
 		[self.refreshControl endRefreshing];
 	}];
 }

@@ -77,8 +77,7 @@
 
 - (void)pollDataManager
 {
-	CLLocation *location = self.locationManager.location;
-	[self.dataManager getLatestTweetsAtLocation:location completionHandler:nil];
+	[self.dataManager getLatestTweetsWithCompletionHandler:nil];
 }
 
 @end

@@ -51,7 +51,7 @@ LOG_LEVEL_ERROR
 	
 	self.scheduler = [[OTAppScheduler alloc] initWithDataManager:self.dataManager locationManager:self.currentLocationManager];
 	NSError *schedulerError;
-	if (![self.scheduler startWithPollingInterval:5.0 error:&schedulerError]) {
+	if (![self.scheduler startWithPollingInterval:60.0 error:&schedulerError]) {
 		DDLogError(@"Failed to start scheduler: %@", schedulerError);
 	}
 	

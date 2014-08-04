@@ -24,6 +24,6 @@ typedef NS_ENUM(NSInteger, OTDataManagerError) {
 
 - (NSPredicate *)tweetsPredicateForLocation:(CLLocation *)location;
 
-- (void)getLatestTweetsAtLocation:(CLLocation *)location completionHandler:(void (^)(NSArray *latestTweets, NSError *error))completionHandler;
+- (void)getLatestTweetsWithCompletionHandler:(void (^)(NSArray *latestTweets, NSError *error))completionHandler;
 
 @end

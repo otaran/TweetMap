@@ -16,23 +16,145 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="f9v-Aj-fXz" kind="relationship" relationship="viewControllers" id="aql-WU-zpd"/>
+                        <segue destination="zgv-aP-uRA" kind="relationship" relationship="viewControllers" id="1wl-cl-Igd"/>
+                        <segue destination="gg7-Ry-5fe" kind="relationship" relationship="viewControllers" id="zJ7-I2-EFv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umS-DE-qS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="98" y="453"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="maJ-5O-aoR">
+            <objects>
+                <navigationController id="zgv-aP-uRA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="Ipa-50-bGk"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XMC-Gr-zdd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BoH-RY-21p" kind="relationship" relationship="rootViewController" id="Jb6-VM-fTv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXD-B3-wWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="892"/>
+        </scene>
+        <!--Tweets on Map-->
+        <scene sceneID="vA8-ES-ILZ">
+            <objects>
+                <viewController id="BoH-RY-21p" customClass="OTTweetMapViewController" sceneMemberID="viewController">
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="Nbw-cK-Gw9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="BoH-RY-21p" id="Mw0-zy-SRm"/>
+                        </connections>
+                    </mapView>
+                    <tabBarItem key="tabBarItem" title="Map" id="esb-AS-Rgz"/>
+                    <navigationItem key="navigationItem" title="Tweets on Map" id="zHo-jD-bwE"/>
+                    <connections>
+                        <outlet property="mapView" destination="Nbw-cK-Gw9" id="5MA-KM-5jv"/>
+                        <segue destination="5Kd-pV-cD1" kind="show" identifier="Map Tweet" id="aWj-GN-e3c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIV-kb-G85" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1693" y="892"/>
+        </scene>
+        <!--Tweet-->
+        <scene sceneID="ZlW-wT-gXl">
+            <objects>
+                <viewController storyboardIdentifier="Tweet View Controller" title="Tweet" id="5Kd-pV-cD1" customClass="OTTweetViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cRb-iG-83s"/>
+                        <viewControllerLayoutGuide type="bottom" id="WXS-VZ-wcD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XTp-Eu-gLW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvs-5B-X8d">
+                                <rect key="frame" x="20" y="72" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="KnS-yj-7AY"/>
+                                    <constraint firstAttribute="width" constant="64" id="Trx-au-baW"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="%Author Name%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q97-vL-KGr">
+                                <rect key="frame" x="92" y="72" width="170" height="26"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="%Date%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pb2-uN-hVL">
+                                <rect key="frame" x="92" y="106" width="67" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="%Text%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="560" translatesAutoresizingMaskIntoConstraints="NO" id="Uvi-Cb-ciX">
+                                <rect key="frame" x="20" y="144" width="560" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Uvi-Cb-ciX" secondAttribute="trailing" constant="20" symbolic="YES" id="BSK-ZW-JbE"/>
+                            <constraint firstItem="Qvs-5B-X8d" firstAttribute="top" secondItem="cRb-iG-83s" secondAttribute="bottom" constant="20" symbolic="YES" id="EeM-0P-fhb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pb2-uN-hVL" secondAttribute="trailing" constant="20" symbolic="YES" id="K5O-xq-97G"/>
+                            <constraint firstItem="Qvs-5B-X8d" firstAttribute="leading" secondItem="Uvi-Cb-ciX" secondAttribute="leading" id="KUI-X7-eOk"/>
+                            <constraint firstItem="Qvs-5B-X8d" firstAttribute="top" secondItem="Q97-vL-KGr" secondAttribute="top" id="WJg-XK-Ne5"/>
+                            <constraint firstItem="Qvs-5B-X8d" firstAttribute="leading" secondItem="XTp-Eu-gLW" secondAttribute="leading" constant="20" id="cHx-0o-blr"/>
+                            <constraint firstItem="pb2-uN-hVL" firstAttribute="top" secondItem="Q97-vL-KGr" secondAttribute="bottom" constant="8" id="k6j-Xr-bTP"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q97-vL-KGr" secondAttribute="trailing" constant="20" symbolic="YES" id="lKd-cy-7ah"/>
+                            <constraint firstItem="Q97-vL-KGr" firstAttribute="leading" secondItem="Qvs-5B-X8d" secondAttribute="trailing" constant="8" id="pwa-hc-hUy"/>
+                            <constraint firstItem="Uvi-Cb-ciX" firstAttribute="top" secondItem="Qvs-5B-X8d" secondAttribute="bottom" constant="8" id="uYC-oT-Ck4"/>
+                            <constraint firstItem="Q97-vL-KGr" firstAttribute="leading" secondItem="pb2-uN-hVL" secondAttribute="leading" id="xiP-OG-En5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tweet" id="pv4-X6-hIG"/>
+                    <connections>
+                        <outlet property="authorLabel" destination="Q97-vL-KGr" id="cdu-OZ-r09"/>
+                        <outlet property="dateLabel" destination="pb2-uN-hVL" id="A2o-KV-uWk"/>
+                        <outlet property="imageView" destination="Qvs-5B-X8d" id="xyS-MF-kSm"/>
+                        <outlet property="textLabel" destination="Uvi-Cb-ciX" id="C4r-K4-jrh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sWD-Pm-GIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2441" y="453"/>
+        </scene>
         <!--Table-->
+        <scene sceneID="GUU-bc-qDU">
+            <objects>
+                <navigationController id="gg7-Ry-5fe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table" id="BSW-gQ-FN3"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C8h-Yd-Krd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="f9v-Aj-fXz" kind="relationship" relationship="rootViewController" id="Q2z-Xh-8o9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0b-Jd-nmt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="53"/>
+        </scene>
+        <!--Tweets-->
         <scene sceneID="kMP-35-ehO">
             <objects>
-                <tableViewController id="f9v-Aj-fXz" customClass="OTTweetTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Tweets" id="f9v-Aj-fXz" customClass="OTTweetTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YQq-3F-n0v">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" textLabel="lQC-hO-OTK" style="IBUITableViewCellStyleDefault" id="Lkl-gF-Suo">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Tweet" textLabel="lQC-hO-OTK" style="IBUITableViewCellStyleDefault" id="Lkl-gF-Suo">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lkl-gF-Suo" id="MSd-Qp-fol">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -45,6 +167,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="5Kd-pV-cD1" kind="show" identifier="Table Tweet" id="bg9-k9-YTi"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -52,14 +177,17 @@
                             <outlet property="delegate" destination="f9v-Aj-fXz" id="Dcj-xM-MMJ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Table" id="hzp-LC-oOm"/>
+                    <navigationItem key="navigationItem" title="Tweets" id="3gy-qV-6g7"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="q5O-WX-VMr">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="biW-HQ-MEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="819" y="453"/>
+            <point key="canvasLocation" x="1693" y="53"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aWj-GN-e3c"/>
+    </inferredMetricsTieBreakers>
 </document>

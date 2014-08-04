@@ -2,7 +2,7 @@
 //  OTPerson.h
 //  TweetMap
 //
-//  Created by Oleksii Taran on 7/30/14.
+//  Created by Oleksii Taran on 8/3/14.
 //  Copyright (c) 2014 Oleksii Taran. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @interface OTPerson : NSManagedObject
 
-@property (nonatomic, retain) NSString * id;
-@property (nonatomic, retain) NSString * screenName;
+@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * profileImageUrl;
+@property (nonatomic, retain) NSString * profileImageURLString;
+@property (nonatomic, retain) NSString * screenName;
 @property (nonatomic, retain) NSSet *tweets;
 @end
 

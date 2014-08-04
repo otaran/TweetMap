@@ -8,9 +8,10 @@
 
 #import "OTDataManager.h"
 #import <STTwitter/STTwitter.h>
-#import <MagicalRecord/NSManagedObject+MagicalRecord.h>
-#import <MagicalRecord/NSManagedObject+MagicalDataImport.h>
+#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <NSArray+Functional/NSArray+Functional.h>
 #import "NSManagedObjectContext+TweetMapExtensions.h"
+#import "OTDefines.h"
 #import "OTLogging.h"
 
 #import "OTTweet.h"
@@ -24,6 +25,8 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@property (nonatomic, strong) STTwitterAPI *twitterAPI;
 
 @end
 
@@ -64,16 +67,74 @@ NSString * const OTDataManagerErrorDomain = @"com.OleksiiTaran.TweetMap.DataMana
 	return [NSPredicate predicateWithValue:YES];
 }
 
-- (void)getLatestTweetsAtLocation:(CLLocation *)location completionHandler:(void (^)(NSArray *, NSError *))completionHandler
+- (void)getLatestTweetsWithCompletionHandler:(void (^)(NSArray *, NSError *))completionHandler
 {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if (completionHandler) {
-			completionHandler(nil, [NSError errorWithDomain:OTDataManagerErrorDomain code:kOTDataManagerErrorNotImplemented userInfo:@{}]);
-		}
-	});
+	completionHandler = completionHandler ?: ^(NSArray *ts, NSError *e) {};
+	
+	if (self.twitterAPI) {
+		[self _getLatestTweetsWithCompletionHandler:completionHandler];
+	} else {
+		self.twitterAPI = [STTwitterAPI twitterAPIOSWithFirstAccount];
+		
+		[self.twitterAPI verifyCredentialsWithSuccessBlock:^(NSString *username) {
+			[self _getLatestTweetsWithCompletionHandler:completionHandler];
+		} errorBlock:^(NSError *error) {
+			completionHandler(nil, error);
+		}];
+	}
 }
 
 #pragma mark -
+
+- (void)_getLatestTweetsWithCompletionHandler:(void (^)(NSArray *, NSError *))completionHandler
+{
+	completionHandler = completionHandler ?: ^(NSArray *ts, NSError *e) {};
+	
+	[self.twitterAPI getStatusesHomeTimelineWithCount:@"10" sinceID:nil maxID:nil trimUser:nil excludeReplies:nil contributorDetails:nil includeEntities:nil successBlock:^(NSArray *statuses) {
+		
+		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+		context.parentContext = self.mainManagedObjectContext;
+		
+		[context performBlock:^{
+			NSMutableArray *tweets = [NSMutableArray arrayWithCapacity:statuses.count];
+			
+			for (NSDictionary *status in statuses) {
+				NSError *error;
+				OTTweet *tweet = [self importTweetUsingValues:status context:context error:&error];
+				if (tweet) {
+					[tweets addObject:tweet];
+				} else {
+					[self.mainManagedObjectContext performBlock:^{
+						completionHandler(nil, error);
+					}];
+					return;
+				}
+			}
+			
+			NSError *error;
+			if ([context save:&error]) {
+				NSArray *tweetIDs = [tweets valueForKey:OTKey(objectID)];
+				[self.mainManagedObjectContext performBlock:^{
+					NSArray *tweets = [tweetIDs mapUsingBlock:^(NSManagedObjectID *tweetID) {
+						return [self.mainManagedObjectContext objectWithID:tweetID];
+					}];
+					completionHandler(tweets, nil);
+					
+					[self.mainManagedObjectContext save:NULL];
+					[self.masterManagedObjectContext performBlock:^{
+						[self.masterManagedObjectContext save:NULL];
+					}];
+				}];
+			} else {
+				[self.mainManagedObjectContext performBlock:^{
+					completionHandler(nil, error);
+				}];
+			}
+		}];
+	} errorBlock:^(NSError *error) {
+		completionHandler(nil, error);
+	}];
+}
 
 - (OTTweet *)importTweetUsingValues:(NSDictionary *)values context:(NSManagedObjectContext *)context error:(out NSError **)error
 {

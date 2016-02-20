@@ -1,0 +1,5 @@
+require 'yaml'
+
+lane :nightly do
+    gym configuration: 'Release', scheme: 'TweetMap'
+end

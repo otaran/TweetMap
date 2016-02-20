@@ -1,5 +1,5 @@
 require 'yaml'
 
 lane :nightly do
-    gym configuration: 'Release', scheme: 'TweetMap'
+    xcarchive scheme: 'TweetMap'
 end
